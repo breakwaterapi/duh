@@ -6,8 +6,8 @@ import json
 import time
 from typing import TYPE_CHECKING, Any
 
-from mistralai import Mistral
-from mistralai import models as mistral_models
+from mistralai.client import Mistral
+from mistralai.client import errors as mistral_models
 
 from duh.core.errors import (
     ModelNotFoundError,
