@@ -69,7 +69,7 @@ def _make_client(response: Any = None) -> MagicMock:
 
 def _make_sdk_error(message: str = "error", status_code: int = 400) -> Any:
     """Create a Mistral SDKError with the given status code."""
-    from mistralai import models as mm
+    from mistralai.client import errors as mm
 
     raw_response = httpx.Response(status_code=status_code, text=message)
     return mm.SDKError(message=message, raw_response=raw_response, body=message)
@@ -365,7 +365,7 @@ class TestErrorMapping:
         assert isinstance(mapped, ProviderOverloadedError)
 
     def test_validation_error_maps_to_overloaded(self):
-        from mistralai import models as mm
+        from mistralai.client import errors as mm
 
         raw_response = httpx.Response(status_code=422, text="validation error")
         err = mm.HTTPValidationError(data=None, raw_response=raw_response, body="")
